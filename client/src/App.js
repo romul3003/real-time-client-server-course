@@ -8,7 +8,7 @@ function App() {
 
   return (
       <div>
-        <WebSock/>
+        <WebSock />
       </div>
   )
 }

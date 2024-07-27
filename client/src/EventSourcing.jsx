@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import { PORT } from './constants';
 
 const EventSourcing = () => {
     const [messages, setMessages] = useState([]);
@@ -11,7 +12,7 @@ const EventSourcing = () => {
     }, [])
 
     const subscribe = async () => {
-        const eventSource = new EventSource(`http://localhost:5000/connect`)
+        const eventSource = new EventSource(`http://localhost:${PORT}/connect`)
         eventSource.onmessage = function (event) {
             const message = JSON.parse(event.data);
             setMessages(prev => [message, ...prev]);
@@ -19,7 +20,7 @@ const EventSourcing = () => {
     }
 
     const sendMessage = async () => {
-        await axios.post('http://localhost:5000/new-messages', {
+        await axios.post(`http://localhost:${PORT}/new-messages`, {
             message: value,
             id: Date.now()
         })

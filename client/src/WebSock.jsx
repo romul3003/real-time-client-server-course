@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import axios from "axios";
+import React, {useRef, useState} from 'react';
+import { PORT } from './constants';
 
 const WebSock = () => {
     const [messages, setMessages] = useState([]);
@@ -9,7 +9,7 @@ const WebSock = () => {
     const [username, setUsername] = useState('')
 
     function connect() {
-        socket.current = new WebSocket('ws://localhost:5000')
+        socket.current = new WebSocket(`ws://localhost:${PORT}`)
 
         socket.current.onopen = () => {
             setConnected(true)
